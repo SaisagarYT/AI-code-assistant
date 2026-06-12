@@ -1,16 +1,17 @@
 import {InfisicalSDK} from '@infisical/sdk'
+import dotenv from 'dotenv';
+dotenv.config();
 
 const client = new InfisicalSDK();
-
+console.log(process.env.INFISICAL_CLIENT_SECRET)
 try{
-    const response = await client.auth().universalAuth.login({
+    await client.auth().universalAuth.login({
         clientId:process.env.INFISICAL_CLIENT_ID,
         clientSecret:process.env.INFISICAL_CLIENT_SECRET
-    })
-    console.log(response.auth)
+    });
 }
 catch(err){
     console.error(err);
 }
 
-const secret = client.secrets
+export default client.secrets().getSecret;
