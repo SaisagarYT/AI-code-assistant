@@ -5,16 +5,16 @@ dotenv.config();
 import clientSecrets from './config/infisical.js';
 import { get } from 'node:http';
 
-const secret = await clientSecrets({
-    environment:"dev",
-    secretName:"BACKEND_PORT",
-    projectId:process.env.INFISICAL_PROJECT_ID
-});
+// const secret = await clientSecrets({
+//     environment:"dev",
+//     secretName:"BACKEND_PORT",
+//     projectId:process.env.INFISICAL_PROJECT_ID
+// });
 
 const app = express();
 app.use(cors());
 
-const PORT = secret.secretValue;
+const PORT = process.env.PORT || 5000;
 console.log(PORT)
 
 app.get('/',(req,res) =>{
